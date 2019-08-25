@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+
+<div class="container">
+  {% for post in posts %}
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="nerd" style="text-decoration: none !important;">
+       <h2><a href="/posts/{{ post.pk }}">{{ post.title }}</a></h2>
+       <p>{{ post.published }}</p>
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
