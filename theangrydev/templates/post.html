@@ -17,6 +17,12 @@
         {% if content.type.name == "Image" %}
           <img src="{{ content.image.path }}"/>
         {% endif %}
+
+        {% if content.type.name == "Code" %}
+        <pre>
+          <code class="language-py">{{ content.text }}</code>
+        </pre>
+        {% endif %}
        {% endfor %}
     </div>
     </div>
