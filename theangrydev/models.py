@@ -21,3 +21,10 @@ class Content(models.Model):
     image = models.ImageField(null=True, blank=True)
     text = models.TextField(null=True, blank=True)
     timestamp = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.post.title} {self.type.name} {self.timestamp}"
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    posts = models.ManyToManyField(Post)

@@ -5,10 +5,17 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-10">
       <div class="nerd">
-       <h2>{{ post.title }}</h2>
+       <h2 class="post_title">{{ post.title }}</h2>
        <p>{{ post.published }}</p>
+       <br/>
+       {% for tag in tags %}
+        <span class="tag"><strong>{{ tag.name }}</strong></span>
+       {%  endfor %}
+
+       <br/><br/>
+
        {% for content in contents %}
         {% if content.type.name == "Text" %}
           <p>{{ content.text }}</p>
