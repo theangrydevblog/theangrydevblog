@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "*"
+gunicorn = "*"
+psycopg2 = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"
