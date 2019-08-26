@@ -5,7 +5,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-10 offset-lg-2">
       <div class="nerd">
        <h2 class="post_title">{{ post.title }}</h2>
        <p>{{ post.published }}</p>
@@ -29,6 +29,10 @@
         <pre>
           <code class="language-py">{{ content.text }}</code>
         </pre>
+        {% endif %}
+
+        {% if content.type.name == "Quote" %}
+          <h3 style="font-size: 3rem;">&quot;{{ content.text }}&quot;</h3>
         {% endif %}
        {% endfor %}
     </div>
