@@ -13,3 +13,5 @@ def post_detail(request, pk):
                     {'post':post,
                     'contents':contents,
                     'tags': tags})
+def about_me(request):
+    return render(request, "about_me.html")
