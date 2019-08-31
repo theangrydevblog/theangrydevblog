@@ -11,7 +11,8 @@
        <p>{{ post.published }}</p>
        <br/>
        {% for tag in tags %}
-        <span class="tag"><strong>{{ tag.name }}</strong></span>
+        <span ><strong><a style="color: red;" href="/tags/{{ tag.id }}">{{ tag.name }}</a></strong></span>
+
        {%  endfor %}
 
        <br/><br/>

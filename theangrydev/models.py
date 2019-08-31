@@ -8,6 +8,9 @@ class Post(models.Model):
     draft = models.BooleanField()
     published = models.DateField()
 
+    def __str__(self):
+        return self.title
+
 class ContentType(models.Model):
     name = models.CharField(max_length=100)
     metadata = JSONField(null=True)
@@ -27,4 +30,7 @@ class Content(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
-    posts = models.ManyToManyField(Post)
+    posts = models.ManyToManyField(Post, related_name="tags")
+
+    def __str__(self):
+        return self.name
