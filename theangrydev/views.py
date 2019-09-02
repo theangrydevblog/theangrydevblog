@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db import connection as dbconn
-from theangrydev.models import Post, Content, Tag
+from theangrydev.models import Post, Content, Tag, Comment
 from theangrydev.dao import queries
 # Create your views here.
 dbconn = dbconn.cursor()
@@ -22,9 +22,11 @@ def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
     contents = Content.objects.filter(post=post).order_by("timestamp")
     tags = Tag.objects.filter(posts__pk=pk)
+    comments = Comment.objects.filter(post=post)
     return render(request, "post.html",
                     {'post':post,
                     'contents':contents,
+                    'comments': comments,
                     'tags': tags})
 
 def tag_detail(request, pk):

@@ -40,6 +40,20 @@
     </div>
   </div>
 
+  <br/><br/>
+
+  <div class="row">
+    <div class="col-lg-10 offset-lg-2">
+      <h4 class="nerd ">Comments</h4>
+      <div class="nerd">
+        {% for comment in comments %}
+          <p>{{ comment.text }}</p>
+          <p>@{{ comment.author.username }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
 </div>
 
 {% endblock %}

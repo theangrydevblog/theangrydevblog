@@ -61,3 +61,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+class Comment(models.Model):
+    text = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.text
