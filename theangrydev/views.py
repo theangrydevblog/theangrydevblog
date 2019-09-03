@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db import connection as dbconn
 from theangrydev.models import Post, Content, Tag, Comment
-from theangrydev.dao import queries
+from theangrydev.dao import sql_templates
 # Create your views here.
 dbconn = dbconn.cursor()
 
@@ -10,7 +10,7 @@ def index(request):
     return render(request, "index.html", {'posts': posts})
 
 def tag_index(request):
-    dbconn.execute(queries["tag_count.sql"])
+    dbconn.execute(sql_templates["tag_count.sql"].render())
     tags = [{'id':id, 'name':name, 'count':count} for id, name, count in dbconn.fetchall()]
     return render(request, "tag_index.html", {
         'tags':tags
