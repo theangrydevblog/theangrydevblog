@@ -10,6 +10,8 @@ django = "*"
 gunicorn = "*"
 psycopg2 = "*"
 pillow = "*"
+celery = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.6"

@@ -27,6 +27,8 @@ DEBUG = bool(int(os.getenv("DEBUG")))
 
 ALLOWED_HOSTS = []
 
+# AMQP
+CELERY_BROKER_URL = f"amqp://{os.getenv('RABBIT_MQ_URL')}"
 
 # Application definition
 
