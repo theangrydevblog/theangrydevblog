@@ -8,9 +8,12 @@ from uuid import uuid4
 # Create your models here.
 
 class User(AbstractBaseUser):
+    def random_username():
+        return f"{str(uuid4()).split('-').pop()}"
+
     email = models.EmailField(unique=True)
     avatar = models.ImageField(null=True, blank=True)
-    username = models.CharField(max_length=100, default=f"{str(uuid4()).split('-').pop()}")
+    username = models.CharField(max_length=100, default=random_username)
 
     objects = UserManager()
 
