@@ -6,7 +6,8 @@ from theangrydev.models import (
     Tag,
     User,
     Comment,
-    Subscription
+    Subscription,
+    Vote
 )
 # Register your models here.
 admin.site.register(Post, admin.ModelAdmin)
@@ -16,3 +17,4 @@ admin.site.register(Tag, admin.ModelAdmin)
 admin.site.register(User, admin.ModelAdmin)
 admin.site.register(Comment, admin.ModelAdmin)
 admin.site.register(Subscription, admin.ModelAdmin)
+admin.site.register(Vote, admin.ModelAdmin)

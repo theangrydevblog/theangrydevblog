@@ -38,6 +38,26 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def upvotes(self):
+        return len(self.vote_set.filter(type=True))
+
+    @property
+    def downvotes(self):
+        return len(self.vote_set.filter(type=False))
+
+class Vote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    type = models.BooleanField()
+
+    class Meta:
+        unique_together = ['user', 'post']
+
+    def __str__(self):
+        return f"{self.user} : {self.post} : {self.type}"
+
+
 class ContentType(models.Model):
     name = models.CharField(max_length=100)
     metadata = JSONField(null=True)
