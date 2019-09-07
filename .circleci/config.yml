@@ -31,7 +31,7 @@ jobs:
             chmod u+x ./kubectl
       - run:
           name: Deploy
-          command: ./deploy.sh
+          command: ls -la && pwd && ./deploy.sh
 workflows:
   version: 2
   build-master:
