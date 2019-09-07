@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: theangrydevblog
+  namespace: default
+  labels:
+    app: theangrydevblog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: theangrydevblog
+  template:
+    metadata:
+      labels:
+        app: theangrydevblog
+    spec:
+      containers:
+        - name: theangrydevblog
+          image: iamprithaj/angrydevblog:latest 
+          ports:
+            - containerPort: 9000
+              name: http
