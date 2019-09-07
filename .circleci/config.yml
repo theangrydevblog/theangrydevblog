@@ -17,7 +17,21 @@ jobs:
           name: Push Docker Image
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker tag iamprithaj/theangrydevblog:latest iamprithaj/theangrydevblog:$CIRCLE_SHA1
             docker push iamprithaj/theangrydevblog:latest
+            docker push iamprithaj/theangrydevblog:$CIRCLE_SHA1
+      - run:
+          name: Install envsubst
+          command: |
+            sudo apt-get update && sudo apt-get -y install gettext-base
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod u+x ./kubectl
+      - run:
+          name: Deploy
+          command: ./deploy.sh
 workflows:
   version: 2
   build-master:

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: theangrydevblog
-          image: iamprithaj/angrydevblog:latest 
+          image: iamprithaj/angrydevblog:$COMMIT_SHA1
           ports:
             - containerPort: 9000
               name: http
