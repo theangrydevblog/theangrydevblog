@@ -20,21 +20,21 @@ spec:
           image: iamprithaj/angrydevblog:$COMMIT_SHA1
           env:
             - name: POSTGRES_HOST
-              value: $POSTGRES_HOST
+              value: "$POSTGRES_HOST"
             - name: POSTGRES_PORT
-              value: $POSTGRES_PORT
+              value: "$POSTGRES_PORT"
             - name: POSTGRES_USER
-              value: $POSTGRES_USER
+              value: "$POSTGRES_USER"
             - name: POSTGRES_NAME
-              value: $POSTGRES_NAME
+              value: "$POSTGRES_NAME"
             - name: POSTGRES_PASSWORD
-              value: $POSTGRES_PASSWORD
+              value: "$POSTGRES_PASSWORD"
             - name: DJANGO_SECRET
-              value: $DJANGO_SECRET
+              value: "$DJANGO_SECRET"
             - name: PORT
-              value: $PORT
+              value: "$PORT"
             - name: DEBUG
-              value: $DEBUG
+              value: "$DEBUG"
           ports:
             - containerPort: 9000
               name: http
