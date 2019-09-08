@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET")
 # Set this to 1 to turn on debug
 DEBUG = bool(int(os.getenv("DEBUG")))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.theangrydev.io']
 
 # AMQP
 CELERY_BROKER_URL = f"amqp://{os.getenv('RABBIT_MQ_URL')}"
