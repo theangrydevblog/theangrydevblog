@@ -17,7 +17,6 @@
     <!--Prism-->
     {% load static %}
     <link href="{% static "theangrydev/css/prism.css" %}" rel="stylesheet">
-    <title>theangrydev</title>
 
     <style>
     body{
@@ -54,22 +53,24 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <a class="navbar-brand" href="/"><strong>theangry<span style="color:red;">dev</span></strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link disabled nerd" href="/about_me">about me</a>
+          </li>
 
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link disabled nerd" href="/about_me">about me</a>
-      </li>
+          <li class="nav-item">
+            <a class="nav-link disabled nerd" href="/tags">categories</a>
+          </li>
 
-      <li class="nav-item">
-        <a class="nav-link disabled nerd" href="/tags">categories</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link disabled nerd" href="#">contact</a>
-      </li>
-
-    </ul>
-
+          <li class="nav-item">
+            <a class="nav-link disabled nerd" href="#">contact</a>
+          </li>
+      </ul>
+      </div>
   </nav>
     <br/>
     <br/>

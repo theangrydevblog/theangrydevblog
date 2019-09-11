@@ -3,6 +3,7 @@
 
 {% block page_content %}
 
+<title>{{ post.title }}</title>
 <div class="container">
   <div class="row">
     <div class="col-lg-10 offset-lg-2">
@@ -19,7 +20,7 @@
 
        {% for content in contents %}
         {% if content.type.name == "Text" %}
-          <p>{{ content.text }}</p>
+          <p style="color: darkgray;">{{ content.text }}</p>
         {% endif %}
 
         {% if content.type.name == "Image" %}
