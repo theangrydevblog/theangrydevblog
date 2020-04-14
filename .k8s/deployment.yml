@@ -61,3 +61,7 @@ spec:
           ports:
             - containerPort: 9000
               name: http
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
