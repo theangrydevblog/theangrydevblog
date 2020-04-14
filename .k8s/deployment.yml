@@ -16,19 +16,42 @@ spec:
         app: theangrydevblog
     spec:
       containers:
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.14
+          command: ["/cloud_sql_proxy",
+                    "-instances=$INSTANCE_CONNECTION_NAME=tcp:5432",
+                    # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
+                    # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
+                    # "-ip_address_types=PRIVATE",
+                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          # [START cloudsql_security_context]
+          securityContext:
+            runAsUser: 2  # non-root user
+            allowPrivilegeEscalation: false
+          # [END cloudsql_security_context]
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
         - name: theangrydevblog
           image: iamprithaj/theangrydevblog:$COMMIT_SHA1
           env:
             - name: POSTGRES_HOST
-              value: "$POSTGRES_HOST"
+              value: 127.0.0.1
             - name: POSTGRES_PORT
-              value: "$POSTGRES_PORT"
+              value: 5432
             - name: POSTGRES_USER
-              value: "$POSTGRES_USER"
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: password
             - name: POSTGRES_NAME
               value: "$POSTGRES_NAME"
-            - name: POSTGRES_PASSWORD
-              value: "$POSTGRES_PASSWORD"
             - name: DJANGO_SECRET
               value: "$DJANGO_SECRET"
             - name: PORT
