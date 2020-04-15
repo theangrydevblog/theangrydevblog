@@ -41,15 +41,9 @@ spec:
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: cloudsql-instance-credentials
-                  key: username
+              value: "POSTGRES_USER"
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: cloudsql-instance-credentials
-                  key: password
+              value: "POSTGRES_PASSWORD"
             - name: POSTGRES_NAME
               value: "$POSTGRES_NAME"
             - name: DJANGO_SECRET
