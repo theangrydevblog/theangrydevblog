@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
+python manage.py collectstatic
 python manage.py migrate
-gunicorn -w $(expr 2 \* $(nproc) + 1) -b 0.0.0.0:$PORT angrydevblog.wsgi
+gunicorn -w $(expr 2 \* $(nproc) + 1) \
+	-b 0.0.0.0:$PORT \
+	angrydevblog.wsgi \
+	--log-level=debug
