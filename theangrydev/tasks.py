@@ -2,7 +2,7 @@ from django.utils.crypto import get_random_string
 from .dao import sql_templates
 from django.shortcuts import render
 from celery import shared_task
-from theangrydev.models import dbconn
+from theangrydev.dao import sql_templates
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -10,7 +10,7 @@ from sendgrid.helpers.mail import Mail
 @shared_task
 def send_email(email):
     message = Mail(
-        from_email='prithaj@theangrydev.io',
+        from_email='prithaj.nath@theangrydev.io',
         to_emails=email,
         subject='New content from theangrydev!!!',
         html_content=render('subs_email.html', {})
@@ -32,12 +32,8 @@ def notify_subscribers(post_id):
     This message will be pushed to the queue when I make a new post.
     This will generate a list of people who have subscribed to the tags attached to this post
     '''
-    sql = sql_templates["subs_list.sql"].render({
-        'POST_ID': post_id
-    })
-
-    dbconn.execute(sql)
-    emails = [email[0] for email in dbconn.fetchall()]
+    subs_list_sql = sql_templates["subs_list.sql"]
+    emails = [email[0] for email in subs_list_sql.run({'POST_ID': post_id})]
 
     for email in emails:
         send_email.delay(email)
