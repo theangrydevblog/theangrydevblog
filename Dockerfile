@@ -20,6 +20,8 @@ RUN apt install -y \
 	net-tools \
     	&& rm -rf /var/lib/apt/lists/*
 
+WORKDIR /usr/bin/theangrydev
+
 COPY . .
 
 RUN pip install -r requirements.txt
