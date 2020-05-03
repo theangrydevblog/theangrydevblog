@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: theangrydev-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: theangrydev-ip
+    networking.gke.io/managed-certificates: theangrydevblog-cert-0
+spec:
+    rules:
+       - host: www.theangrydev.io
+         http:
+            paths:
+              - path: /
+                backend:
+                   serviceName: theangrydev-load-balancer
+                   servicePort: 80

@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: theangrydevblog-cert-0
+spec:
+  domains:
+    - www.theangrydev.io
+
