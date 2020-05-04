@@ -52,6 +52,8 @@ spec:
               value: "$PORT"
             - name: DEBUG
               value: "$DEBUG"
+            - name: CIDR_RANGES
+              value: "$CIDR_RANGES" 
           ports:
             - containerPort: 9000
               name: http
