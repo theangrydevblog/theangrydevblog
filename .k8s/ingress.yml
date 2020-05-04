@@ -10,7 +10,7 @@ spec:
        - host: www.theangrydev.io
          http:
             paths:
-              - path: /
+              - path: /*
                 backend:
                    serviceName: theangrydev-load-balancer
                    servicePort: 80
