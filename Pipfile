@@ -13,6 +13,7 @@ psycopg2 = "*"
 pillow = "*"
 celery = "*"
 sendgrid = "*"
+django-allow-cidr = "*"
 
 [requires]
 python_version = "3.8"

@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allow_cidr.middleware.AllowCIDRMiddleware'
 ]
 
 ROOT_URLCONF = 'angrydevblog.urls'
@@ -87,6 +88,10 @@ DATABASES = {
     }
 }
 
+# ALLOWED CIDR RANGES FOR K8S HEALTH CHECKER
+# https://mozilla.github.io/meao/2018/02/27/django-k8s-elb-health-checks/
+# 10.142.0.34/24,192.160.0.0/16
+ALLOWED_CIDR_NETS = os.getenv("CIDR_RANGES").split(",")
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
