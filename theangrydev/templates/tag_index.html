@@ -3,13 +3,15 @@
 
 {% block page_content %}
 
+<title>Categories</title>
+
 <div class="container">
   <br/><br/>
   {% for tag in tags %}
   <div class="row">
     <div class="col-lg-8">
       <div class="nerd" style="text-decoration: none !important;">
-       <h2><strong><a style="color: red;" href="/tags/{{ tag.id }}">{{ tag.name }}</a></strong></h2>
+       <h2><strong><a class="animated-link" style="color: red;" href="/tags/{{ tag.id }}">{{ tag.name }}</a></strong></h2>
        <p style="color: grey;">{{ tag.count }} posts published</p>
     </div>
     </div>

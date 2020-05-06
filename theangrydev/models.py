@@ -80,6 +80,7 @@ class Content(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
+    description = models.CharField(max_length=1000, blank=True)
     posts = models.ManyToManyField(Post, related_name="tags")
 
     def __str__(self):
