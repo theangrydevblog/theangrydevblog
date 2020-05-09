@@ -6,7 +6,7 @@
 <title>{{ post.title }}</title>
 <div class="container">
   <div class="row">
-    <div class="col-lg-10 offset-lg-2">
+    <div class="col-lg-8 offset-lg-2">
       <div class="nerd">
        <h2 class="post_title">{{ post.title }}</h2>
        <p>{{ post.published }}</p>
@@ -20,7 +20,7 @@
 
        {% for content in contents %}
         {% if content.type.name == "Text" %}
-          <p style="color: darkgray;">{{ content.text }}</p>
+          <p style="color: rgb(34, 33, 33);">{{ content.text }}</p>
         {% endif %}
 
         {% if content.type.name == "Image" %}
@@ -38,20 +38,9 @@
         {% endif %}
        {% endfor %}
     </div>
-    </div>
-  </div>
-
-  <br/><br/>
-
-  <div class="row">
-    <div class="col-lg-10 offset-lg-2">
-      <h4 class="nerd ">Comments</h4>
-      <div class="nerd">
-        {% for comment in comments %}
-          <p>{{ comment.text }}</p>
-          <p>@{{ comment.author.username }}</p>
-        {% endfor %}
-      </div>
+      <div class="nerd angry-button">Comments</div>
+        <div class="nerd">
+        </div>
     </div>
   </div>
 
