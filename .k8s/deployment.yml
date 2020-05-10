@@ -54,6 +54,16 @@ spec:
               value: "$DEBUG"
             - name: CIDR_RANGES
               value: "$CIDR_RANGES" 
+            - name: AWS_STORAGE_BUCKET_NAME
+              value: "$AWS_STORAGE_BUCKET_NAME"
+            - name : AWS_S3_REGION_NAME
+              value: "$AWS_S3_REGION_NAME"
+            - name : AWS_ACCESS_KEY_ID
+              value: "$AWS_ACCESS_KEY_ID"
+            - name : AWS_SECRET_ACCESS_KEY
+              value: "$AWS_SECRET_ACCESS_KEY"
+            - name : AWS_S3_CUSTOM_DOMAIN
+              value: "$AWS_S3_CUSTOM_DOMAIN"
           ports:
             - containerPort: 9000
               name: http
