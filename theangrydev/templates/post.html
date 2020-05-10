@@ -8,7 +8,10 @@
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <div class="nerd">
+        <br></br>
+        <br></br>
        <h2 class="post_title">{{ post.title }}</h2>
+        <br></br>
        <p>{{ post.published }}</p>
        <br/>
        {% for tag in tags %}
@@ -34,7 +37,9 @@
         {% endif %}
 
         {% if content.type.name == "Quote" %}
-          <h3 style="font-size: 3rem;">&quot;{{ content.text }}&quot;</h3>
+          <br></br>
+          <h3 style="font-size: 4rem; font-family: 'Alegreya Sans SC', sans-serif;">{{ content.text }}</h3>
+          <br></br>
         {% endif %}
        {% endfor %}
     </div>
