@@ -26,6 +26,7 @@
 
     nav{
       background-color: whitesmoke;
+      color: slategrey;
     }
 
     .nerd{
@@ -33,7 +34,7 @@
     }
 
     .post_title{
-      font-size: 6rem;
+      font-size: 4rem;
     }
 
     .tag_title{
@@ -59,10 +60,9 @@
       text-align: center;
     }
 
-    a:hover{
+    a{
       text-decoration: none;
     }
-
     .animated-link{
       transition: all 0.2s;
     }
@@ -99,6 +99,15 @@
       background: red; 
     }
 
+    #navbar-avatar{
+      border-color: red;
+      border-radius: 36px;
+      border-width: 3px;
+      height: 41px;
+      width: 42px;
+      padding: 2px 2px 2px 3px;
+    }
+
     </style>
 
   </head>
@@ -108,21 +117,34 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link disabled nerd" href="/about_me">about me</a>
+            <a class="nav-link nerd" href="/about_me">about me</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link disabled nerd" href="/tags">categories</a>
+            <a class="nav-link nerd" href="/tags">categories</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link disabled nerd" href="#">contact</a>
+            <a class="nav-link nerd" href="#">contact</a>
           </li>
       </ul>
+      {% if user.is_authenticated %}
+      <div class="nav nav-item dropdown" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a style="color:slategrey;" class="nerd nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span>welcome, {{ user.username }} </span><img class="navbar-toggler-icon" style="height: 30px; width: 30px; border-radius: 15px;" src="https://api.adorable.io/avatars/285/prithaj.nath@theangrydev.io.png"/>
+        </a>
+        <div style="background-color: whitesmoke;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="animated-link nerd dropdown-item" href="#">My Profile</a>
+          <a class="animated-link nerd dropdown-item" href="#">Sign out</a>
+        </div>
       </div>
+      {% endif %}
+      </div>
+
   </nav>
     <br/>
     <br/>
