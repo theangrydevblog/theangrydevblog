@@ -18,7 +18,7 @@ def tag_index(request):
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)
-    contents = Content.objects.filter(post=post).order_by("timestamp")
+    contents = Content.objects.filter(post=post).order_by("rank")
     tags = Tag.objects.filter(posts__pk=pk)
     comments = Comment.objects.filter(post=post)
     return render(request, "post.html",
