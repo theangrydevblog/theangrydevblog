@@ -63,7 +63,7 @@ class Vote(models.Model):
 
 class ContentType(models.Model):
     name = models.CharField(max_length=100)
-    metadata = JSONField(null=True)
+    metadata = JSONField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -75,6 +75,7 @@ class Content(models.Model):
     text = models.TextField(null=True, blank=True)
     timestamp = models.DateField(default=timezone.now)
     rank = models.IntegerField(default=0)
+    metadata = JSONField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.post.title} {self.type.name} {self.timestamp}"

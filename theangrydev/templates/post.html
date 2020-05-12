@@ -32,7 +32,7 @@
 
         {% if content.type.name == "Code" %}
         <pre>
-          <code class="language-py">{{ content.text }}</code>
+          <code class="language-{{ content.metadata.ext }}">{{ content.text }}</code>
         </pre>
         {% endif %}
 
