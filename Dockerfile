@@ -20,6 +20,9 @@ RUN apt install -y \
 	net-tools \
     	&& rm -rf /var/lib/apt/lists/*
 
+RUN NODE_VERSION=13 && curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x  | bash - \
+	&& apt install -y nodejs
+
 WORKDIR /usr/bin/theangrydev
 
 COPY . .
