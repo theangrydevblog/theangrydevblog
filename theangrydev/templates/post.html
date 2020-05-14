@@ -27,11 +27,14 @@
         {% endif %}
 
         {% if content.type.name == "Image" %}
+        <div class="image-container">
           <img class="content-img" src="{{ content.image.url }}"/>
+        </div>
+        <br/><br/>
         {% endif %}
 
         {% if content.type.name == "Code" %}
-        <pre>
+        <pre class="code-block">
           <code class="language-{{ content.metadata.ext }}">{{ content.text }}</code>
         </pre>
         {% endif %}
