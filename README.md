@@ -1,5 +1,13 @@
 # theangrydevblog
 
+## Asset pipeline
+
+We use webpack to bundle all of our JS and CSS into one file and then use Django to collect that bundled file into one directory. The `assets` directory contains all the development versions of our JS and CSS files. The `assets/js/index.js` serves as the entry point for webpack. Once `npm run start` is run, webpack munches all of the assets into `dist/bundle.js`. Then we use `python manage.py collectstatic` to collect that bundled file to `STATIC_ROOT`
+
+The following directories contain minified JS and should not be version controlled
+* `dist`
+* `static`
+
 ## Instructions
 
 ### How to install dependencies

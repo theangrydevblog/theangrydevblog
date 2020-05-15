@@ -1,0 +1,116 @@
+    body{
+      font-family: 'Raleway', sans-serif;
+      background-color: whitesmoke;
+    }
+
+    .content-img{
+      height: auto;
+      width: 100%;
+    }
+
+    .code-block{
+        background-color: whitesmoke;
+    }
+
+    nav{
+      background-color: whitesmoke;
+      color: slategrey;
+    }
+
+    .nerd{
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .post_title{
+      font-size: 120px;
+      font-family: 'Bungee Inline', cursive;
+    }
+
+    .tag_title{
+      font-size: 5rem;
+    }
+
+    ::-moz-selection { /* Code for Firefox */
+        color: white;
+        background: red;
+    }
+
+    ::selection {
+        color: white;
+        background: red;
+    }
+
+    footer{
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      line-height: 200px;
+      text-align: center;
+    }
+
+    a{
+      text-decoration: none;
+    }
+    .animated-link{
+      transition: all 0.2s;
+    }
+    .animated-link:hover{
+      text-decoration: none;
+      color: white !important;
+      background-color: red;
+    }
+
+    .angry-button{
+      border-color: black;
+      border-style: solid;
+      padding: 5px 15px 5px 15px;
+      font-size: larger;
+      font-weight: bolder;
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      transition: all 0.4s;
+    }
+
+    .angry-button:hover{
+      cursor: pointer;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px whitesmoke; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: red; 
+    }
+
+    #navbar-avatar{
+      border-color: red;
+      border-radius: 36px;
+      border-width: 3px;
+      height: 41px;
+      width: 42px;
+      padding: 2px 2px 2px 3px;
+    }
+
+    .image-container{
+      border-width: initial;
+      border-color: black;
+      border-style: solid;
+      padding-bottom: 100px;
+      padding-right: 12px;
+      padding-left: 12px;
+      padding-top: 12px;
+      box-shadow: 12px 10px #e2dddd;
+    }
+
+    .content-img{
+      border-width: thin;
+      border-color: black;
+      border-style: solid;
+    }
+

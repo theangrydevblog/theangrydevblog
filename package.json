@@ -1,0 +1,25 @@
+{
+  "name": "theangrydevblog",
+  "version": "1.0.0",
+  "description": "Personal tech blog",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prithajnath/theangrydevblog.git"
+  },
+  "author": "Prithaj Nath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prithajnath/theangrydevblog/issues"
+  },
+  "homepage": "https://github.com/prithajnath/theangrydevblog#readme",
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

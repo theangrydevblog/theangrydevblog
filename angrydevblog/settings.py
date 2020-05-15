@@ -146,7 +146,8 @@ USE_TZ = True
 
 STATIC_URL = f"{os.path.join(BASE_DIR, 'static')}/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage' if bool(int(os.getenv("DEBUG"))) else 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Media
 MEDIAFILES_LOCATION = 'media'
