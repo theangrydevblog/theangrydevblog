@@ -27,6 +27,8 @@ WORKDIR /usr/bin/theangrydev
 
 COPY . .
 
+RUN npm ci
+
 RUN pip install -r requirements.txt
 
 EXPOSE 9000
