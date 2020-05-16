@@ -98,6 +98,14 @@ a{
 }
 
 .image-container{
+  border-color: transparent;
+}
+
+.content-img{
+  width: 100%;
+}
+
+.polaroid-container{
   border-width: initial;
   border-color: black;
   border-style: solid;
@@ -108,10 +116,11 @@ a{
   box-shadow: 12px 10px #e2dddd;
 }
 
-.content-img{
+.polaroid-img{
   border-width: thin;
   border-color: black;
   border-style: solid;
+  width: 100%;
 }
 
 .blinker{
