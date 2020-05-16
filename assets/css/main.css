@@ -1,6 +1,10 @@
 body{
   font-family: 'Raleway', sans-serif;
   background-color: whitesmoke;
+  background-image: radial-gradient(circle 30px,#bfb2b2 0%, #a2999900 10%);
+  background-position: 0 0, 50px 50px;
+  background-size: 100px 100px;
+  background-attachment: fixed;
 }
 
 .content-img{
@@ -13,7 +17,7 @@ body{
 }
 
 nav{
-  background-color: whitesmoke;
+  background-color: transparent;
   color: slategrey;
 }
 
@@ -75,6 +79,7 @@ a{
 
 .angry-button:hover{
   cursor: pointer;
+  background-color: whitesmoke;
 }
 
 /* width */
@@ -114,6 +119,7 @@ a{
   padding-left: 12px;
   padding-top: 12px;
   box-shadow: 12px 10px #e2dddd;
+  background-color: whitesmoke;
 }
 
 .polaroid-img{
