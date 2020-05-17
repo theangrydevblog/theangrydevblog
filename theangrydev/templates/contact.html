@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+
+<style>
+input, textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 2px solid black;
+    resize: none;
+    background-color: whitesmoke;
+    width: 100%;
+}   
+
+input:focus, textarea:focus {
+  border: 2px solid rgba(236, 13, 13);
+}
+</style>
+
+<title>Contact me</title>
+<br/><br/>
+
+<div class="container nerd">
+  <div class="row">
+    <div class="col-sm">
+        <div class="polaroid-container">
+            <img class="polaroid-img" src="https://res-console.cloudinary.com/dzmp7xptn/thumbnails/transform/v1/image/upload//v1589660549/Y29mZmVlcHl0aG9uX2szamp1Mg==/drilldown"/>
+        </div>
+    </div>
+    <div style="padding-top: 40px;" class="col-sm offset-sm-1">
+        <p>Wanna chat or grab coffee? shoot me a message. And oh, please don't spam. You WILL get banned</p>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="first_name"><strong>first name</strong></label>
+                <input id="first_name" type="text" name="first_name">
+            </div>
+
+            <br/>
+
+            <div>
+               <label for="last_name"><strong>last name</strong></label>
+               <input id="last_name" type="text" name="last_name">
+            </div>
+
+            <br/>
+
+            <div>
+                <label for="email"><strong>email</strong></label>
+                <input id="email" type="email" name="email">
+            </div>
+
+            <br/>
+
+            <div>
+                <label for="message"><strong>message</strong></label>
+                <textarea style="height: 200px;" id="message" type="text" name="message"></textarea>
+            </div>
+
+            <br/><br/>
+            <div class="angry-button">submit</div>
+        </form>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<script>
+    const submit = document.querySelector("div[class='angry-button']");
+    submit.addEventListener('click', function(e){
+        const form = document.querySelector("form");
+        form.submit();
+    });
+</script>
+{% endblock %}

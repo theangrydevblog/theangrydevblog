@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from theangrydev.models import Post, Content, Tag, Comment
+from theangrydev.models import Post, Content, Tag, Comment, Message
 from theangrydev.dao import sql_templates
+from theangrydev.forms import ContactForm
 # Create your views here.
 
 def index(request):
@@ -38,3 +39,25 @@ def tag_detail(request, pk):
 
 def about_me(request):
     return render(request, "about_me.html")
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            print(first_name,last_name,email,message)
+            message = Message.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                message=message
+            )
+
+            return render(request, 'contact_success.html', {"first_name": first_name})
+    else:
+        form = ContactForm()
+    return render(request, "contact.html", {"form": form})

@@ -20,6 +20,7 @@ from theangrydev import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about_me/', views.about_me),
+    path('contact/', views.contact),
     path('', views.index),
     path("posts/<int:pk>", views.post_detail),
     path("tags/", views.tag_index),

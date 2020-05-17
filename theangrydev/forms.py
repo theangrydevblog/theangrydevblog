@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, ReadOnlyPasswordHashField
+from theangrydev.models import Message
 User = get_user_model()
 
 class LoginForm(AuthenticationForm):
@@ -42,3 +43,18 @@ class UserAdminChangeForm(forms.ModelForm):
 
     def clean_password(self):
         return self.initial["password"]
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'message'
+        )
+    first_name = forms.CharField(label='first_name', max_length=100)
+    last_name = forms.CharField(label='last_name', max_length=100)
+    email = forms.CharField(label='email', max_length=100)
+    message = forms.CharField(label='message', max_length=1000)
+

@@ -102,3 +102,13 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f"{self.subscriber} -> {self.tag}"
+
+class Message(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    message = models.TextField(max_length=1000)
+    timestamp = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.email} : {self.timestamp}"

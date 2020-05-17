@@ -9,7 +9,8 @@ from theangrydev.models import (
     User,
     Comment,
     Subscription,
-    Vote
+    Vote,
+    Message
 )
 # Register your models here.
 class UserAdmin(BaseUserAdmin):
@@ -43,3 +44,4 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Comment, admin.ModelAdmin)
 admin.site.register(Subscription, admin.ModelAdmin)
 admin.site.register(Vote, admin.ModelAdmin)
+admin.site.register(Message, admin.ModelAdmin)
