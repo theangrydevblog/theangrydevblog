@@ -17,3 +17,4 @@ window.addEventListener("scroll", function(e){
         navbar.style.backgroundColor = "transparent";
     }
 });
+
