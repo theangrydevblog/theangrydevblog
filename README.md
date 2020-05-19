@@ -10,6 +10,10 @@ The following directories contain minified JS and should not be version controll
 
 ## Instructions
 
+### How to add React components
+
+Since the app is not a full-fledged SPA, we only need to load the React virtual DOM in certain pages. We maintain a separate Webpack config file for this and bundle our React components in a separate file called `bundle-react.js`. We define our React components as `.jsx` files in `assets/js/components` and Webpack bundles them with Babel, which has its own config file called `.babelrc`. Once run, the bundled file is created in `dist/bundle-react.js` and we load this file only in pages where a React virtual DOM is needed.
+
 ### How to install dependencies
 
 * This project uses pipenv for Python dependency management. All Python packages should be installed with `pipenv install <package>`
