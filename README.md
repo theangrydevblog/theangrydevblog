@@ -1,4 +1,4 @@
-# theangrydevblog
+![theangrydevblog](https://res.cloudinary.com/dzmp7xptn/image/upload/v1589940358/theangrydevblogmd_ka0f3v.png)
 
 ## Asset pipeline
 
