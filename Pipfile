@@ -17,6 +17,8 @@ django-allow-cidr = "*"
 faker = "*"
 django-storages = "*"
 boto3 = "*"
+graphene-django = "*"
+graphene = "*"
 
 [requires]
 python_version = "3.8"
