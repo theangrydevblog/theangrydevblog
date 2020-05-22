@@ -5,15 +5,20 @@ from django.contrib.auth.models import AbstractBaseUser
 from .managers import UserManager
 
 from uuid import uuid4
+from faker import Faker
+
+fake_name_generator = Faker()
 # Create your models here.
 
 class User(AbstractBaseUser):
     def random_username():
+        return fake_name_generator.name().replace(" ","").lower()
         return f"{str(uuid4()).split('-').pop()}"
 
     email = models.EmailField(unique=True)
     avatar = models.ImageField(null=True, blank=True)
     username = models.CharField(max_length=100, default=random_username)
+    uuid = models.UUIDField(default=uuid4)
 
     objects = UserManager()
 
