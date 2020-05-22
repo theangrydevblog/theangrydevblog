@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from theangrydev import views
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
+from theangrydev.graphql import api
+
+import os
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +29,8 @@ urlpatterns = [
     path('', views.index),
     path("posts/<int:pk>", views.post_detail),
     path("tags/", views.tag_index),
-    path("tags/<int:pk>", views.tag_detail)
+    path("tags/<int:pk>", views.tag_detail),
+
+    # GraphQL
+    path("graphql/", GraphQLView.as_view(graphiql=bool(os.getenv("DEBUG")), schema=api.schema)),
 ]
