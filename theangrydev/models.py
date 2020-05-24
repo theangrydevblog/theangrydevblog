@@ -13,10 +13,9 @@ fake_name_generator = Faker()
 class User(AbstractBaseUser):
     def random_username():
         return fake_name_generator.name().replace(" ","").lower()
-        return f"{str(uuid4()).split('-').pop()}"
 
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(null=True, blank=True)
+    avatar = models.CharField(max_length=75, default="https://api.adorable.io/avatars/40/e1f2c206-ceda-447c-a81c-0b164def.png")
     username = models.CharField(max_length=100, default=random_username)
     uuid = models.UUIDField(default=uuid4)
 

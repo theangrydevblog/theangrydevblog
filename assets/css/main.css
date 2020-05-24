@@ -110,6 +110,24 @@ a{
   width: 100%;
 }
 
+.comment-container{
+  border-width: initial;
+  border-color: black;
+  border-style: solid;
+  padding-right: 5%;
+  padding-left: 12px;
+  padding-top: 20px;
+  box-shadow: 12px 10px #e2dddd;
+  background-color: whitesmoke;
+}
+
+
+.user-avatar{
+  height: 100%;
+  width: 2rem;
+  border-radius: 100%;
+}
+
 .polaroid-container{
   border-width: initial;
   border-color: black;
