@@ -10,7 +10,7 @@
       <div class="nerd">
         <br></br>
         <br></br>
-       <h2 class="post_title">{{ post.title }}<span class="blinker"><strong>_</strong></span></h2>
+       <h2 class="post_title"postId={{ post.id }}>{{ post.title }}<span class="blinker"><strong>_</strong></span></h2>
         <br></br>
        <p>{{ post.published }}</p>
        <br/>
@@ -53,10 +53,8 @@
         {% endif %}
        {% endfor %}
     </div>
-      <div class="nerd angry-button">Comments</div>
-      <div id="react-comment" class="nerd angry-button">React comment</div>
-        <div class="nerd">
-        </div>
+      <!-- <div class="nerd angry-button">Comments</div> -->
+      <div id="react-comment"></div>
     </div>
   </div>
 

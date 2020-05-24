@@ -1,2 +1,2 @@
-import "./components/comment.jsx";
+import "./components/commentList.jsx";
 

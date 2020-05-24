@@ -1,4 +1,5 @@
 const path = require("path");
+
 module.exports = {
     entry: "./assets/js/react-index.js",
     mode: process.env.DEBUG == 1 ? "development" : "production",
