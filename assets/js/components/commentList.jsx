@@ -23,7 +23,7 @@ function CommentList(){
   const [ comments, setComments ] = useState([]);
   const [ getComments, { loading, data } ] = useLazyQuery(GET_COMMENTS);
 
-  if (data && comments.length == 0){
+  if (data?.comments?.length > 0 && comments.length == 0){
     setComments(data.comments);
   }
 
