@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ReactDOM from "react-dom";
 import Comment from "./comment.jsx"
+import client from "../apolloClient"
 
 import gql from 'graphql-tag';
 import ApolloClient from 'apollo-boost';
+import { ApolloProvider, useLazyQuery } from '@apollo/react-hooks';
 
 const GET_COMMENTS = gql`
 query comments($postId: Int){
@@ -17,51 +19,36 @@ query comments($postId: Int){
 }
 `;
 
-console.log(process.env.GRAPHQL_URL);
+function CommentList(){
+  const [ comments, setComments ] = useState([]);
+  const [ getComments, { loading, data } ] = useLazyQuery(GET_COMMENTS);
 
-const client = new ApolloClient({
-  uri: "/graphql/",
-  headers: {
-      'X-CSRFToken': document.cookie.split("=")[1]
+  if (data && comments.length == 0){
+    setComments(data.comments);
   }
-});
 
-
-export default class CommentList extends Component{
-
-    constructor(props) {
-      super(props);
-      this.state = {comments: []};
+  return (
+    <div>
+      { comments.map((x,i) => <div key={i}><Comment text={x.text} avatar={x.author.avatar} author={x.author.username}/><br/></div>) }
+      <br/><br/>
+      <div className="nerd angry-button" onClick={function(){
+        getComments({
+        variables:{
+          postId: document.querySelector(".post_title").getAttribute("postid")
+        }
+      });
     }
+      }>Show comments</div>
+    </div>
+  );
 
-    grabComments = () => {
-        const postId = document.querySelector(".post_title").getAttribute("postid");
-        client
-        .query({
-            query: GET_COMMENTS,
-            variables: {
-                postId: postId
-            }
-        }).then(
-            result => this.setState({
-                comments: this.state.comments.concat(result.data.comments)
-            }
-          )
-        );
-    }
-
-    render() {
-    return <div>
-        { this.state.comments.map((x,i) => <div key={i}><Comment text={x.text} avatar={x.author.avatar} author={x.author.username}/><br/></div>) }
-        <br/>
-        <div className="nerd angry-button" onClick={this.grabComments}>Show comments</div>
-        </div>;
-    }
 }
 
 const rootEl = document.getElementById('react-comment');
 
 rootEl ? ReactDOM.render(
-  <CommentList  />,
+  <ApolloProvider client={client}>
+    <CommentList  />
+  </ApolloProvider>,
   rootEl
   ) : null;
