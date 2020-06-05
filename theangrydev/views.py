@@ -5,7 +5,7 @@ from theangrydev.forms import ContactForm
 # Create your views here.
 
 def index(request):
-    posts = Post.objects.all().order_by("-published")
+    posts = Post.objects.filter(draft=False).order_by("-published")
     return render(request, "index.html", {'posts': posts})
 
 def tag_index(request):
