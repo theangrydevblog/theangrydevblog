@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser
+from django.template.defaultfilters import slugify
+from django.urls import reverse
 from .managers import UserManager
 
 from uuid import uuid4
@@ -41,9 +43,13 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     draft = models.BooleanField()
     published = models.DateField()
+    slug = models.SlugField(blank=True, null=True, unique=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'slug': self.slug})
 
     @property
     def upvotes(self):
@@ -52,6 +58,11 @@ class Post(models.Model):
     @property
     def downvotes(self):
         return len(self.vote_set.filter(type=False))
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
