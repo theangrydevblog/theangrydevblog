@@ -14,7 +14,7 @@
        <br/><br/>
        {% for post in posts %}
          <div class="nerd" style="text-decoration: none !important;">
-          <h2><strong><a class="animated-link" style="color: red;" href="/posts/{{ post.pk }}">{{ post.title }}</a></strong></h2>
+          <h2><strong><a class="animated-link" style="color: red;" href="/posts/{{ post.slug }}">{{ post.title }}</a></strong></h2>
           <p>{{ post.published }}</p>
         </div>
        {%  endfor %}
