@@ -96,7 +96,7 @@ class Content(models.Model):
         return f"{self.post.title} {self.type.name} {self.timestamp}"
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=1000, blank=True)
     posts = models.ManyToManyField(Post, related_name="tags")
 
