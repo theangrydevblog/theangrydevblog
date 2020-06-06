@@ -100,6 +100,9 @@ class Tag(models.Model):
     description = models.CharField(max_length=1000, blank=True)
     posts = models.ManyToManyField(Post, related_name="tags")
 
+    def get_absolute_url(self):
+        return reverse('tag_detail', kwargs={'name': self.name})
+
     def __str__(self):
         return self.name
 

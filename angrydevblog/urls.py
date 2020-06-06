@@ -29,7 +29,8 @@ urlpatterns = [
     path('', views.index),
     path('posts/<slug:slug>', views.post_detail, name='post_detail'),
     path('tags/', views.tag_index),
-    path('tags/<int:pk>', views.tag_detail),
+    # path('tags/<int:pk>', views.tag_detail),
+    path('tags/<str:name>', views.tag_detail, name='tag_detail'),
 
     # GraphQL
     path("graphql/", GraphQLView.as_view(graphiql=bool(os.getenv("DEBUG")), schema=api.schema)),

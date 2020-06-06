@@ -28,8 +28,8 @@ def post_detail(request, slug):
                     'comments': comments,
                     'tags': tags})
 
-def tag_detail(request, pk):
-    tag = Tag.objects.filter(pk=pk).first()
+def tag_detail(request, name):
+    tag = Tag.objects.filter(name=name).first()
     posts = tag.posts.all()
     return render(request, "tag.html", {
         'tag': tag,
