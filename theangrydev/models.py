@@ -90,7 +90,12 @@ class Vote(models.Model):
 
 
 class ContentType(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=20, choices=[
+        ('TXT','Text'),
+        ('CDE','Code'),
+        ('IMG','Image'),
+        ('QTE','Quote'),
+    ])
     metadata = JSONField(null=True, blank=True)
 
     def __str__(self):
