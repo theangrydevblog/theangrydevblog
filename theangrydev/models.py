@@ -50,6 +50,18 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.slug})
+    
+    def add_vote(self, user, vote):
+        self.vote_set.create(
+            user=user,
+            post=self,
+            type=vote
+        )
+
+    # We don't want to just disassociate the vote but completely delete it
+    def remove_vote(self, user):
+        vote_by_user = Vote.objects.filter(user=user, post=self).first()
+        vote_by_user.delete()
 
     @property
     def upvotes(self):
@@ -64,6 +76,7 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
+# This makes upvoting/downvoting strictly ACID
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
