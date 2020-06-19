@@ -19,6 +19,7 @@ django-storages = "*"
 boto3 = "*"
 graphene-django = "*"
 graphene = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

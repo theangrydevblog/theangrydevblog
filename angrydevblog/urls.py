@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about_me/', views.about_me),
     path('contact/', views.contact),
+    path('sign_in/', views.sign_in),
+    path('oauth/', views.oauth),
     path('', views.index),
     path('posts/<slug:slug>', views.post_detail, name='post_detail'),
     path('tags/', views.tag_index),

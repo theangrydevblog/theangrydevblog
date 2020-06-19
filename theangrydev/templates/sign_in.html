@@ -19,48 +19,43 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-      <a class="navbar-brand" href="/"><strong>theangry<span style="color:red;">dev</span></strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link nerd" href="/about_me">about me</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link nerd" href="/tags">categories</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link nerd" href="/contact">contact</a>
-          </li>
-      </ul>
-      {% if user.is_authenticated %}
-      <div class="nav nav-item dropdown" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <a style="color:slategrey;" class="nerd nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span>welcome, {{ user.username }} </span><img class="navbar-toggler-icon" style="height: 30px; width: 30px; border-radius: 15px;" src="https://api.adorable.io/avatars/285/prithaj.nath@theangrydev.io.png"/>
-        </a>
-        <div style="background-color: whitesmoke;" class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="animated-link nerd dropdown-item" href="#">My Profile</a>
-          <a class="animated-link nerd dropdown-item" href="#">Sign out</a>
-        </div>
-      </div>
-      {% else %}
-      <div class="nav-item">
-            <a class="nav-link nerd" href="/sign_in">sign in</a>
-      </div>
-      {% endif %}
-      </div>
-
-  </nav>
     <br/>
     <br/>
 
-    {% block page_content %}{% endblock %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="nerd">
+        <br></br>
+        <br></br>
+
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nerd nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="home" aria-selected="true">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class=" nerd nav-link" id="profile-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="profile" aria-selected="false">Sign up</a>
+      </li>
+    </ul>
+    <br/><br/>
+    <div class="tab-content" id="myTabContent">
+      <div class="nerd tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="home-tab">
+        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href={{ oauth_url }}><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592536679/githublogo_rxpbwr.png"/>Github</a></div>
+        <br/>
+        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href="#"><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592538889/gitlablogo_yhvpdx.png"/>Gitlab</a></div>
+      </div>
+      <div class="nerd tab-pane fade" id="signup" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href={{ oauth_url }}><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592536679/githublogo_rxpbwr.png"/>Github</a></div>
+        <br/>
+        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href="#"><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592538889/gitlablogo_yhvpdx.png"/>Gitlab</a></div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+  </div>
 
     {% load static %}
     <script src="{% static "bundle.js" %}"></script>
