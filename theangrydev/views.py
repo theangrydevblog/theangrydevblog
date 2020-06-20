@@ -29,7 +29,7 @@ def sign_in(request):
 
     params = {
         "client_id": client_id,
-        "state": state
+        "state": state,
     }
 
     url_parts = list(urlparse.urlparse(base))
@@ -46,6 +46,9 @@ def oauth(request):
     # https://www.theangrydev.io/oauth?code=3461291a4c10ba99d0e3&state=helloworld
     code = request.GET.get("code")
     state = request.GET.get("state")
+
+    client_id = os.getenv("OAUTH_CLIENT_ID")
+    client_secret = os.getenv("OAUTH_CLIENT_SECRET")
 
     # Get access token
     resp = requests.get("https://github.com/login/oauth/access_token", params={
