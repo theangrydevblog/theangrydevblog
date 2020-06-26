@@ -3,7 +3,8 @@ from theangrydev.models import User, Post, Content, Tag, Comment, Message
 from theangrydev.dao import sql_templates
 from theangrydev.forms import ContactForm
 from urllib.parse import urlencode
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.urls import reverse
 
 import os
 import json
@@ -25,7 +26,10 @@ def tag_index(request):
 def sign_in(request):
     base = "https://github.com/login/oauth/authorize"
     client_id = os.getenv("OAUTH_CLIENT_ID")
+    client_signup_id = os.getenv("OAUTH_SIGNUP_CLIENT_ID")
     state = "helloworld"
+
+    message = request.GET.get('message')
 
     params = {
         "client_id": client_id,
@@ -37,11 +41,22 @@ def sign_in(request):
 
     oauth_url = urlparse.urlunparse(url_parts)
 
+    params = {
+        "client_id": client_signup_id,
+        "state": state,
+    }
+
+    url_parts = list(urlparse.urlparse(base))
+    url_parts[4] = urlencode(params)
+
+    oauth_signup_url = urlparse.urlunparse(url_parts)
     return render(request, "sign_in.html", {
-        'oauth_url': oauth_url
+        'oauth_url': oauth_url,
+        'oauth_signup_url': oauth_signup_url,
+        'message': message
     })
 
-def oauth(request):
+def oauth_login(request):
     # GitHub redirects user to this view
     # https://www.theangrydev.io/oauth?code=3461291a4c10ba99d0e3&state=helloworld
     code = request.GET.get("code")
@@ -74,11 +89,74 @@ def oauth(request):
     email = github_user['email']
 
     user = User.objects.filter(email=email).first()
+    if not user:
+        return redirect("/sign_in?message=No account found")
     if user.avatar != avatar_url:
         user.avatar = avatar_url
         user.save()
 
-    login(request, user)
+    login(request, user, backend='theangrydev.lib.backends.AngryDevAuth')
+
+    return redirect('/')
+
+def oauth_signup(request):
+     # GitHub redirects user to this view
+    # https://www.theangrydev.io/oauth?code=3461291a4c10ba99d0e3&state=helloworld
+    code = request.GET.get("code")
+    state = request.GET.get("state")
+
+    client_id = os.getenv("OAUTH_SIGNUP_CLIENT_ID")
+    client_secret = os.getenv("OAUTH_SIGNUP_CLIENT_SECRET")
+
+    # Get access token
+    resp = requests.get("https://github.com/login/oauth/access_token", params={
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "code": code,
+        "redirect_uri": "",
+        "state": state
+    }, headers={
+        "Accept": "application/json"
+    })
+
+    access_token = json.loads(resp.content)["access_token"]
+
+    # Get Github user data
+    resp = requests.get("https://api.github.com/user", headers={
+        "Authorization": f"token {access_token}"
+    })
+
+    github_user = json.loads(resp.content)
+
+    avatar_url = github_user['avatar_url']
+    email = github_user['email']
+
+    user = User.objects.filter(email=email).first()
+    if not user:
+        user = User.objects.create(
+            email=email,
+            avatar=avatar_url
+        )
+
+    base = "https://github.com/login/oauth/authorize"
+    client_id = os.getenv("OAUTH_CLIENT_ID")
+    state = "helloworld"
+
+    params = {
+        "client_id": client_id,
+        "state": state,
+    }
+
+    url_parts = list(urlparse.urlparse(base))
+    url_parts[4] = urlencode(params)
+
+    oauth_url = urlparse.urlunparse(url_parts)
+    return redirect(oauth_url)
+    
+    
+
+def sign_out(request):
+    logout(request)
 
     return redirect('/')
 

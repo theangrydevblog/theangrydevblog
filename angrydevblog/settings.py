@@ -104,6 +104,13 @@ DATABASES = {
     }
 }
 
+
+# CUSTOM AUTH BACKEND FOR OAUTH 2.0
+AUTHENTICATION_BACKENDS = [
+    'theangrydev.lib.backends.AngryDevAuth',
+    'django.contrib.auth.backends.ModelBackend'
+]
+
 # ALLOWED CIDR RANGES FOR K8S HEALTH CHECKER
 # https://mozilla.github.io/meao/2018/02/27/django-k8s-elb-health-checks/
 # 10.142.0.34/24,192.160.0.0/16
