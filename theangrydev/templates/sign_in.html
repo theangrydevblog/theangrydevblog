@@ -40,6 +40,11 @@
       </li>
     </ul>
     <br/><br/>
+    {% if message %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+    {% endif %}
     <div class="tab-content" id="myTabContent">
       <div class="nerd tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="home-tab">
         <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href={{ oauth_url }}><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592536679/githublogo_rxpbwr.png"/>Github</a></div>
@@ -47,7 +52,7 @@
         <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href="#"><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592538889/gitlablogo_yhvpdx.png"/>Gitlab</a></div>
       </div>
       <div class="nerd tab-pane fade" id="signup" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href={{ oauth_url }}><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592536679/githublogo_rxpbwr.png"/>Github</a></div>
+        <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href={{ oauth_signup_url }}><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592536679/githublogo_rxpbwr.png"/>Github</a></div>
         <br/>
         <div class="angry-button"><a class="nerd" style="color: black; text-decoration: none;" href="#"><img style="height: 50px; margin-right: 10px;" src="https://res.cloudinary.com/dzmp7xptn/image/upload/v1592538889/gitlablogo_yhvpdx.png"/>Gitlab</a></div>
       </div>
