@@ -1,19 +1,20 @@
 import json
 import requests
 
-from base import OAuthHandler
+from .base import OAuthHandler
 
 class GitHub(OAuthHandler):
-
     def __init__(self, client_id, client_secret):
-        super().__init__('GitHub',
+        super().__init__(
+        'GitHub',
+        'https://github.com/login/oauth/authorize',
         'https://github.com/login/oauth/access_token',
         client_id,
         client_secret
         )
 
     def get_user_data(self, code):
-        resp = requests.get(self.base_url, params={
+        resp = requests.get(self.access_token_url, params={
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "code": code,
@@ -24,6 +25,7 @@ class GitHub(OAuthHandler):
         })
 
         access_token = json.loads(resp.content)["access_token"]
+
         resp = requests.get("https://api.github.com/user", headers={
             "Authorization": f"token {access_token}"
         })

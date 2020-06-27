@@ -2,14 +2,26 @@ from django.shortcuts import render, redirect
 from theangrydev.models import User, Post, Content, Tag, Comment, Message
 from theangrydev.dao import sql_templates
 from theangrydev.forms import ContactForm
+from theangrydev.lib.oauth import GitHub
 from urllib.parse import urlencode
 from django.contrib.auth import login, logout
 from django.urls import reverse
+
 
 import os
 import json
 import requests
 import urllib.parse as urlparse
+
+github_login = GitHub(
+    os.getenv('OAUTH_CLIENT_ID'),
+    os.getenv('OAUTH_CLIENT_SECRET')
+)
+
+github_signup = GitHub(
+    os.getenv('OAUTH_SIGNUP_CLIENT_ID'),
+    os.getenv('OAUTH_SIGNUP_CLIENT_SECRET')
+)
 # Create your views here.
 
 def index(request):
@@ -24,32 +36,11 @@ def tag_index(request):
     })
 
 def sign_in(request):
-    base = "https://github.com/login/oauth/authorize"
-    client_id = os.getenv("OAUTH_CLIENT_ID")
-    client_signup_id = os.getenv("OAUTH_SIGNUP_CLIENT_ID")
-    state = "helloworld"
-
     message = request.GET.get('message')
 
-    params = {
-        "client_id": client_id,
-        "state": state,
-    }
-
-    url_parts = list(urlparse.urlparse(base))
-    url_parts[4] = urlencode(params)
-
-    oauth_url = urlparse.urlunparse(url_parts)
-
-    params = {
-        "client_id": client_signup_id,
-        "state": state,
-    }
-
-    url_parts = list(urlparse.urlparse(base))
-    url_parts[4] = urlencode(params)
-
-    oauth_signup_url = urlparse.urlunparse(url_parts)
+    # oauth_signup_url = urlparse.urlunparse(url_parts)
+    oauth_url = github_login.get_oauth_url()
+    oauth_signup_url = github_signup.get_oauth_url()
     return render(request, "sign_in.html", {
         'oauth_url': oauth_url,
         'oauth_signup_url': oauth_signup_url,
@@ -62,31 +53,7 @@ def oauth_login(request):
     code = request.GET.get("code")
     state = request.GET.get("state")
 
-    client_id = os.getenv("OAUTH_CLIENT_ID")
-    client_secret = os.getenv("OAUTH_CLIENT_SECRET")
-
-    # Get access token
-    resp = requests.get("https://github.com/login/oauth/access_token", params={
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "code": code,
-        "redirect_uri": "",
-        "state": state
-    }, headers={
-        "Accept": "application/json"
-    })
-
-    access_token = json.loads(resp.content)["access_token"]
-
-    # Get Github user data
-    resp = requests.get("https://api.github.com/user", headers={
-        "Authorization": f"token {access_token}"
-    })
-
-    github_user = json.loads(resp.content)
-
-    avatar_url = github_user['avatar_url']
-    email = github_user['email']
+    email, avatar_url = github_login.get_user_data(code)
 
     user = User.objects.filter(email=email).first()
     if not user:
@@ -105,31 +72,7 @@ def oauth_signup(request):
     code = request.GET.get("code")
     state = request.GET.get("state")
 
-    client_id = os.getenv("OAUTH_SIGNUP_CLIENT_ID")
-    client_secret = os.getenv("OAUTH_SIGNUP_CLIENT_SECRET")
-
-    # Get access token
-    resp = requests.get("https://github.com/login/oauth/access_token", params={
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "code": code,
-        "redirect_uri": "",
-        "state": state
-    }, headers={
-        "Accept": "application/json"
-    })
-
-    access_token = json.loads(resp.content)["access_token"]
-
-    # Get Github user data
-    resp = requests.get("https://api.github.com/user", headers={
-        "Authorization": f"token {access_token}"
-    })
-
-    github_user = json.loads(resp.content)
-
-    avatar_url = github_user['avatar_url']
-    email = github_user['email']
+    email, avatar_url = github_signup.get_user_data(code)
 
     user = User.objects.filter(email=email).first()
     if not user:
@@ -138,22 +81,9 @@ def oauth_signup(request):
             avatar=avatar_url
         )
 
-    base = "https://github.com/login/oauth/authorize"
-    client_id = os.getenv("OAUTH_CLIENT_ID")
-    state = "helloworld"
-
-    params = {
-        "client_id": client_id,
-        "state": state,
-    }
-
-    url_parts = list(urlparse.urlparse(base))
-    url_parts[4] = urlencode(params)
-
-    oauth_url = urlparse.urlunparse(url_parts)
+    oauth_url = github_login.get_oauth_url()
     return redirect(oauth_url)
-    
-    
+
 
 def sign_out(request):
     logout(request)
