@@ -29,7 +29,6 @@ urlpatterns = [
     path('sign_in/', views.sign_in),
     path('sign_out/', views.sign_out),
     path('oauth/', views.oauth_login),
-    path('oauth_signup/', views.oauth_signup),
     path('', views.index),
     path('posts/<slug:slug>', views.post_detail, name='post_detail'),
     path('tags/', views.tag_index),

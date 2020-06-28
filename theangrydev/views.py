@@ -56,33 +56,15 @@ def oauth_login(request):
     email, avatar_url = github_login.get_user_data(code)
 
     user = User.objects.filter(email=email).first()
-    if not user:
-        return redirect("/sign_in?message=No account found")
-    if user.avatar != avatar_url:
-        user.avatar = avatar_url
-        user.save()
 
-    login(request, user, backend='theangrydev.lib.backends.AngryDevAuth')
-
-    return redirect('/')
-
-def oauth_signup(request):
-     # GitHub redirects user to this view
-    # https://www.theangrydev.io/oauth?code=3461291a4c10ba99d0e3&state=helloworld
-    code = request.GET.get("code")
-    state = request.GET.get("state")
-
-    email, avatar_url = github_signup.get_user_data(code)
-
-    user = User.objects.filter(email=email).first()
     if not user:
         user = User.objects.create(
             email=email,
             avatar=avatar_url
         )
+    login(request, user, backend='theangrydev.lib.backends.AngryDevAuth')
 
-    oauth_url = github_login.get_oauth_url()
-    return redirect(oauth_url)
+    return redirect('/')
 
 
 def sign_out(request):
