@@ -8,6 +8,10 @@ AllCodeTags.forEach(function(tag){
     tag.parentNode.innerHTML = tag.parentNode.innerHTML.trim();
 });
 
+var navButton = document.querySelector(".navbar-toggler-icon");
+window.addEventListener("click", function(e){
+   navbar.style.backgroundColor = "whitesmoke";
+});
 
 var navbar = document.querySelector("nav");
 window.addEventListener("scroll", function(e){
