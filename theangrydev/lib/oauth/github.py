@@ -31,4 +31,10 @@ class GitHub(OAuthHandler):
         })
 
         user = json.loads(resp.content)
-        return (user['email'], user['avatar_url'])
+        email, github_id, avatar = user['email'], user['id'],user['avatar_url']
+
+        # Some GitHub users don't want their email to be publicly available so we'll just create a fake email based on their GitHub ID
+        if not email:
+            email = f"f-gh-{github_id}@theangrydev.io"
+
+        return (email, avatar)
