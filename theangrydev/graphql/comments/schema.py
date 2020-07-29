@@ -1,6 +1,7 @@
 import graphene
 
 from graphene_django.types import DjangoObjectType
+from graphene_django.filter import DjangoFilterConnectionField
 
 from theangrydev.models import (
     User,
@@ -14,10 +15,16 @@ class AuthorType(DjangoObjectType):
 class CommentType(DjangoObjectType):
     class Meta:
         model = Comment
+        interfaces = (graphene.relay.Node,)
         fields = ('author','text')
 
-class Query(graphene.ObjectType):
-    comments = graphene.List(CommentType, post_id=graphene.Int())
+class CommentConnection(graphene.relay.Connection):
+    class Meta:
+        node = CommentType
 
-    def resolve_comments(self, info, post_id):
+class Query(graphene.ObjectType):
+    node = graphene.relay.Node.Field()
+    comments = graphene.relay.ConnectionField(CommentConnection, post_id=graphene.Int())
+    
+    def resolve_comments(root, info, post_id):
         return Comment.objects.filter(post__id=post_id)
